@@ -1,11 +1,11 @@
 <template>
   <div id="personContainer">
     <div class="personHead">
-      <i class="iconfont icon-zhuye" @click="goToHome"></i>
+      <i class="iconfont icon-zhuye" @click="$router.push('/homePage')"></i>
       <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="">
       <div class="searchAndCar">
-        <i class="iconfont icon-sousuo"></i>
-        <i class="iconfont icon-gouwuche"></i>
+        <i class="iconfont icon-sousuo" @click="$router.push('/search')"></i>
+        <i class="iconfont icon-gouwuche" @click="$router.push('/shoppingCar')"></i>
       </div>
     </div>
     <div class="personMain">
@@ -13,11 +13,11 @@
       <div class="loginType">
         <div class="phoneLogin">
           <i class="iconfont icon-shouji"></i>
-          <button>手机号快速登录</button>
+          <button @click="toPhoneLogin">手机号快速登录</button>
         </div>
         <div class="emailLogin">
           <i class="iconfont icon-xin"></i>
-          <button>邮箱账号登录</button>
+          <button @click="toMessageLogin">邮箱账号登录</button>
         </div>
       </div>
     </div>
@@ -41,9 +41,13 @@
 
 <script type="text/ecmascript-6">
   export default {
+    
     methods: {
-      goToHome(){
-        this.$router.push('/homePage')
+      toPhoneLogin () {
+        this.$router.push('/login/phone')
+      },
+      toMessageLogin () {
+        this.$router.push('/login/e-mail')
       }
     }
   }

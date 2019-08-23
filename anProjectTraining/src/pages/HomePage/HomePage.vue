@@ -5,7 +5,7 @@
         <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="">
         <i class="iconfont icon-sousuo"></i>
         <input type="text" placeholder="搜索商品，共21613款好物" @click.prevent="toSearch"/>
-        <button>登录</button>
+        <button @click="toLogin">登录</button>
       </div>
     </div>
     
@@ -47,16 +47,8 @@
       <div class="tagWithMask" v-show="!tagShow">
         <div class="maskHead">全部频道</div>
         <div class="maskList">
-          <ul>
-            <li class="active">推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
-            <li>推荐</li>
+          <ul v-if="homeData.kingKongModule">
+            <li v-for="(item, index) in homeData.kingKongModule.kingKongList" :key="index">{{item.text}}</li>
           </ul>
         </div>
         <div class="mask" @click="xialaTag"></div>
@@ -73,16 +65,16 @@
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img src="./images/01.jpg" alt="">
+          <img src="https://yanxuan.nosdn.127.net/e5c1181a28981ca0b6087d2fb3e7d9d8.jpg?imageView&quality=75&thumbnail=750x0" alt="">
         </div>
         <div class="swiper-slide">
-          <img src="./images/02.jpg" alt="">
+          <img src="https://yanxuan.nosdn.127.net/566844f22dbcc4f949aa2403bf1503e6.jpg?imageView&quality=75&thumbnail=750x0" alt="">
         </div>
         <div class="swiper-slide">
-          <img src="./images/03.jpg" alt="">
+          <img src="https://yanxuan.nosdn.127.net/975f983b0314af8da367b781efa5afeb.jpg?imageView&quality=75&thumbnail=750x0" alt="">
         </div>
         <div class="swiper-slide">
-          <img src="./images/04.jpg" alt="">
+          <img src="https://yanxuan.nosdn.127.net/b69d768f3cef93c13360a99c094cb5d0.jpg?imageView&quality=75&thumbnail=750x0" alt="">
         </div>
       </div>
       <!-- 如果需要分页器 -->
@@ -92,63 +84,19 @@
     <!-- 自营品牌 无忧退货 快速退款 -->
     <div class="fastRefund">
       <ul class="fastRefundList">
-        <li class="fastRefundItem">
+        <li class="fastRefundItem" v-for="(item, index) in homeData.policyDescList" :key="index">
           <i class="iconfont icon-airudiantubiaohuizhi-zhuanqu_yiwutong"></i>
-          <span>网易自营品牌</span>
-        </li>
-        <li class="fastRefundItem">
-          <i class="iconfont icon-yduidunpaikongxin"></i>
-          <span>30天无忧退货</span>
-        </li>
-        <li class="fastRefundItem">
-          <i class="iconfont icon-jiaoyitixing"></i>
-          <span>48小时快速退款</span>
+          <span>{{item.desc}}</span>
         </li>
       </ul>
     </div>
 
     <!-- 商品类型选择 -->
     <div class="shopType">
-      <ul class="shopTypeList">
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/5243a7191dd4c86b3b28859089273aa8.gif" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-          <span>居家生活</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/2415a74cea7d3f080c2dcaa791884572.png" alt="">
-          <span>服饰鞋包</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/d916591adea776351e084016335e5820.png" alt="">
-          <span>美食酒水</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/6c3bd9d885c818b1f73e497335a68b47.png" alt="">
-          <span>个护清洁</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/559d2a240ec20b096590a902217009ff.png" alt="">
-          <span>母婴亲子</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/5c088559ebcc3f0ffcda663f04dfbeb2.png" alt="">
-          <span>运动旅行</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/fbca8e1f2948f0c09fc7672c2c125384.png" alt="">
-          <span>数码家电</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/f7281169d4e82d5d8d52aa1fec83fe01.png" alt="">
-          <span>全球特色</span>
-        </li>
-        <li>
-          <img src="https://yanxuan.nosdn.127.net/3954c3cbeb4359dd7007be7a076e0dda.gif" alt="">
-          <span>超级会员</span>
+      <ul class="shopTypeList" v-if="homeData.kingKongModule">
+        <li v-for="(item, index) in homeData.kingKongModule.kingKongList" :key="index">
+          <img :src="item.picUrl" alt="">
+          <span>{{item.text}}</span>
         </li>
       </ul>
     </div>
@@ -160,27 +108,9 @@
 
     <!-- 模块 -->
     <div class="shopMode">
-      <div class="shopSingle">
-        <p class="bigFont">9.9超值专区首发</p>
-        <p class="smallFont">180款爆品新定价</p>
-        <img src="https://yanxuan-item.nosdn.127.net/b2065eab67acc5923a8ec71167a35f6a.png?imageView&thumbnail=150x150&quality=75" alt="">
-        <img src="https://yanxuan-item.nosdn.127.net/569ab2c87df93c56de39b8c890463242.png?imageView&thumbnail=150x150&quality=75" alt="">
-      </div>
-      <div class="shopSingle">
-        <p class="bigFont">9.9超值专区首发</p>
-        <p class="smallFont">180款爆品新定价</p>
-        <img src="https://yanxuan-item.nosdn.127.net/b2065eab67acc5923a8ec71167a35f6a.png?imageView&thumbnail=150x150&quality=75" alt="">
-        <img src="https://yanxuan-item.nosdn.127.net/569ab2c87df93c56de39b8c890463242.png?imageView&thumbnail=150x150&quality=75" alt="">
-      </div>
-      <div class="shopSingle">
-        <p class="bigFont">9.9超值专区首发</p>
-        <p class="smallFont">180款爆品新定价</p>
-        <img src="https://yanxuan-item.nosdn.127.net/b2065eab67acc5923a8ec71167a35f6a.png?imageView&thumbnail=150x150&quality=75" alt="">
-        <img src="https://yanxuan-item.nosdn.127.net/569ab2c87df93c56de39b8c890463242.png?imageView&thumbnail=150x150&quality=75" alt="">
-      </div>
-      <div class="shopSingle">
-        <p class="bigFont">9.9超值专区首发</p>
-        <p class="smallFont">180款爆品新定价</p>
+      <div class="shopSingle" v-for="(item, index) in homeData.sceneLightShoppingGuideModule" :key="index">
+        <p class="bigFont">{{item.styleItem.title}}</p>
+        <p class="smallFont">{{item.styleItem.desc}}</p>
         <img src="https://yanxuan-item.nosdn.127.net/b2065eab67acc5923a8ec71167a35f6a.png?imageView&thumbnail=150x150&quality=75" alt="">
         <img src="https://yanxuan-item.nosdn.127.net/569ab2c87df93c56de39b8c890463242.png?imageView&thumbnail=150x150&quality=75" alt="">
       </div>
@@ -340,12 +270,14 @@
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.css'
   import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
 
   export default {
     data() {
       return {
         tagShow: true,
-        tagRotate: false
+        tagRotate: false,
+        // homeData: {}
       }
     },
     methods: {
@@ -355,29 +287,34 @@
       },
       toSearch () {
         this.$router.push('/search')
+      },
+      toLogin () {
+        this.$router.push('/person')
       }
     },
+    computed: {
+      ...mapState({
+        homeData: state => state.homePage.homeData
+      })
+    }, 
     mounted() {
-      new Swiper ('.swiper-container', {
-        loop: true, // 循环模式选项
-        autoplay: true, // 自动轮播
-        delay: 2000,
-        // 如果需要分页器
-        pagination: {
-          el: '.swiper-pagination', 
-        }
+      this.$nextTick(() => {
+        this.$store.dispatch('getHomeData')
+        new Swiper ('.swiper-container', {
+          loop: true, // 循环模式选项
+          autoplay: true, // 自动轮播
+          delay: 2000,
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination', 
+          }
+        })
+        new BScroll('.tag',{
+          scrollX: true,
+          scrollY: false,
+        })
       })
-      // setTimeout(()=>{
-      //   new BScroll('.tag',{
-      //     scrollX: true,
-      //     scrollY: false,
-      //   })
-      // },1000) 
-      new BScroll('.tag',{
-        scrollX: true,
-        scrollY: false,
-      })
-    }
+    },
   }
 </script>
 
@@ -470,7 +407,7 @@
         z-index 99
         .mask
           width 130%
-          height 1037%
+          height 1105%
           background rgba(0,0,0,.5)
         .maskHead
           height 100%
@@ -480,7 +417,7 @@
         .maskList
           // width 360px
           width 130%
-          height 150px
+          height 150PX
           ul
             position relative
             width 100%

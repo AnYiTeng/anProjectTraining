@@ -1,31 +1,44 @@
 <template>
   <div class="allTag">
-      <div class="tag wrapper">
-        <ul class="headTag">
-          <li class="headTagItem"  v-for="(item, index) in type" :key="index">
-            {{item}}
-          </li>
-        </ul>
-      </div>
+    <div class="tag wrapper">
+      <ul class="headTag">
+        <li class="headTagItem" v-for="(item, index) in type" :key="index" :class="{active:currentIndex ===index}" @touchstart="choose(index)">
+          {{item.tabName}}
+        </li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
   import {mapState} from 'vuex'
   export default {
-    computed: {
-        ...mapState({
-            type: state => state.lookGoods.type
-        })
+    data() {
+      return {
+        currentIndex: 0
+      }
     },
-        mounted() {
-        new BScroll('.wrapper',{
-            scrollX: true,
-            scrollY: false,
-            bounce: false
-        })
-    },    
+    computed: {
+      ...mapState({
+          type: state => state.lookGoods.type
+      })
+    },
+    mounted() {
+      this.$store.dispatch('reqLookGoodTag')
+      new BScroll('.wrapper',{
+          scrollX: true,
+          scrollY: false,
+          bounce: false
+      })
+      this.$store.commit('getCurrentIndex', this.currentIndex)
+    },   
+    methods: {
+      choose(index){
+        this.currentIndex = index
+        this.$router.push(`/lookGoods/${index}`)
+      }
+    }, 
   }
 </script>
 

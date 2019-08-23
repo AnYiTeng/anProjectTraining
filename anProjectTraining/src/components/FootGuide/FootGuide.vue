@@ -5,11 +5,11 @@
             <i class="iconfont icon-icon-test"></i>
             <p>首页</p>
         </li>
-        <li :class="$route.path==='/classify'?'active':''" @click="goto('/classify')">
+        <li :class="$route.path==='/classify/classcontent/0'?'active':''" @click="goto('/classify')">
             <i class="iconfont icon-chuangtougui"></i>
             <p>分类</p>
         </li>
-        <li :class="$route.path==='/lookGoods'?'active':''" @click="goto('/lookGoods')">
+        <li :class="$route.path==='/lookGoods/0'?'active':''" @click="goto('/lookGoods')">
             <i class="iconfont icon-zhaopian"></i>
             <p>识物</p>
         </li>
@@ -37,6 +37,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
     #footerGuide
+        z-index 99
         position fixed
         width 100%
         bottom 0px

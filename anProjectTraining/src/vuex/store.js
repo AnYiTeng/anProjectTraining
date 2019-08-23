@@ -4,15 +4,23 @@ import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
 
-Vue.use(Vuex)
-
 import lookGoods from './modules/lookGoods'
+import homePage from './modules/homePage'
+import search from './modules/search'
+import classpage from './modules/classpage'
+import hotSelect from './modules/hotSelect'
+
+Vue.use(Vuex)
 
 export default new Store ({
     mutations,
     actions,
     getters,
     modules: {
-        lookGoods: lookGoods
+        lookGoods: lookGoods,
+        homePage: homePage,
+        search: search,
+        classpage: classpage,
+        hotSelect: hotSelect
     }
 })

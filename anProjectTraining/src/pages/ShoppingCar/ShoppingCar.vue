@@ -23,7 +23,7 @@
     <div class="goLogin">
       <img src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noCart-d6193bd6e4.png" alt="">
       <p>去添加点什么吧</p>
-      <button>登录</button>
+      <button @click="$router.push('/person')">登录</button>
     </div>
   </div>
 </template>
